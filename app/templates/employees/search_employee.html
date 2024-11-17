@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>JNto HCM</title>
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static', filename='img/jnto_logo.png') }}" rel="icon">
+  <link href="{{ url_for('static', filename='img/jnto_logo_with_name.png') }}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/bootstrap-icons.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/main_style.css') }}" rel="stylesheet">
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="" class="logo d-flex align-items-center">
+        <img src="{{ url_for('static', filename='img/jnto_logo.png') }}" alt="Logo">
+        <span class="d-none d-lg-block">JNto HCM</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+      </form>
+    </div><!-- End Search Bar -->
+  </header>
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ url_for('main.index') }}">
+          <i class="bi bi-grid"></i>
+          <span>Home</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-target="#funcionarios-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-person"></i>
+          <span>Funcionários</span>
+          <i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="funcionarios-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{ url_for('employees.search_employee_page') }}" class="active">
+              <i class="bi bi-search"></i><span>Buscar</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('employees.create_employee_page') }}">
+              <i class="bi bi-plus-circle" ></i><span>Criar Novo</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Components Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="pages-contact.html">
+          <i class="bi bi-envelope"></i>
+          <span>Contact</span>
+        </a>
+      </li><!-- End Contact Page Nav -->
+    </ul>
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Buscar Funcionário</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Home</a></li>
+          <li class="breadcrumb-item active">Funcionário</li>
+          <li class="breadcrumb-item active">Buscar</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Buscar por Funcionário</h5>
+
+              <!-- Search Results -->
+              <form action="{{ url_for('employees.search_employee_page') }}" method="POST">
+                <div class="row g-2 align-items-center">
+                  <div class="col-8">
+                    <input type="text" class="form-control" id="query" name="query" placeholder="Digite o nome do funcionário">
+                  </div>
+                  <div class="col-auto">
+                    <button type="submit" class="btn btn-success rounded-pill btn-sm">
+                      <i class="bi bi-search"></i> Buscar
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Search Results -->
+              {% if results %}
+              <h6 class="mt-4">Resultados da Busca:</h6>
+              <table class="table table-striped table-bordered table-hover small text-center">
+                <thead>
+                  <tr>
+                    <th>Matrícula</th>
+                    <th>Nome Completo</th>
+                    <th>Email</th>
+                    <th>Data de Admissão</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for employee in results %}
+                  <tr>
+                    <td>{{ employee.employee_id }}</td>
+                    <td>{{ employee.full_name }}</td>
+                    <td>{{ employee.email }}</td>
+                    <td>{{ employee.hire_date }}</td>
+                    <td>
+                      <!-- Botão de Editar -->
+                      <a href="" class="btn btn-info rounded-pill btn-sm">
+                        <i class="bi bi-pencil"></i> Editar
+                      </a>
+                      <!-- Botão de Deletar -->
+                      <form action="" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger rounded-pill btn-sm" onclick="return confirm('Tem certeza que deseja deletar este funcionário?');">
+                          <i class="bi bi-trash"></i> Deletar
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+              {% elif results is not none %}
+              <div class="alert alert-info mt-4" role="alert">
+                Nenhum funcionário encontrado.
+              </div>
+              {% endif %}
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main><!-- End #main -->
+
+  <!-- Bootstrap JS -->
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+  <!-- Template Main JS File -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/form.js') }}"></script>
+</body>
+</html>

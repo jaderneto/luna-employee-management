@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luna</title>
+
+    <!-- Favicons -->
+    <link href="{{ url_for('static', filename='img/luna-logo.png') }}" rel="icon">
+    <link href="{{ url_for('static', filename='img/luna-name-and-logo.png') }}" rel="apple-touch-icon">
+
+    <link href="{{ url_for('static', filename='css/index_style.css') }}" rel="stylesheet">
+
+</head>
+<body>
+<main>
+    <img src="static/img/hero-bg.jpg" class="hero-bg" alt="" data-aos="fade-in">
+    <div class="box" data-aos="fade-up" data-aos-delay="100">
+        <div class="inner-box">
+            <div class="forms-wrap">
+                <form method="POST" action="{{ url_for('main.index') }}" autocomplete="off" class="sign-in-form">
+                    {{ login_form.hidden_tag() }}
+                    <div class="logo">
+                        <img src="static/img/luna-name-and-logo.png" alt="easyclass" />
+                    </div>
+
+                    <div class="heading">
+                        <h2>Olá, Bem-vindo!</h2>
+                        <h6>Ainda não está cadastrado?</h6>
+                        <a href="#" class="toggle">Inscrever-se</a>
+                    </div>
+
+                    <div class="actual-form">
+                        <div class="input-wrap">
+                            {{ login_form.login_username(class="input-field") }}
+                            <label>Username</label>
+                        </div>
+
+                        <div class="input-wrap">
+                            {{ login_form.login_password(class="input-field") }}
+                            <label>Password</label>
+                        </div>
+
+                        {{ login_form.login_submit(class="sign-btn") }}
+
+                        <p class="text">
+                            Esqueceu sua senha ou seus dados de login?
+                            <a href="#">Obtenha ajuda</a> para fazer login
+                        </p>
+                    </div>
+                </form>
+
+                <form method="POST" action="{{ url_for('main.index') }}" autocomplete="off" class="sign-up-form">
+                    {{ register_form.hidden_tag() }}
+
+                    <div class="logo">
+                        <img src="static/img/luna-name-and-logo.png" alt="easyclass" />
+                    </div>
+
+                    <div class="heading">
+                        <h2>Cadastre-se</h2>
+                        <h6>Já tem uma conta?</h6>
+                        <a href="#" class="toggle">Entrar</a>
+                    </div>
+
+                    <div class="actual-form">
+                        <div class="input-wrap">
+                            {{ register_form.register_username(class="input-field") }}
+                            <label>Username</label>
+                        </div>
+
+                        <div class="input-wrap">
+                            {{ register_form.email(class="input-field") }}
+                            <label>Email</label>
+                        </div>
+
+                        <div class="input-wrap">
+                            {{ register_form.register_password(class="input-field") }}
+                            <label>Senha</label>
+                        </div>
+
+                        <div class="input-wrap">
+                            {{ register_form.confirm_password(class="input-field") }}
+                            <label>Confirmação de Senha</label>
+                        </div>
+
+                        <div class="input-wrap">
+                            {{ register_form.role(class="input-field") }}
+                            <label>Selecione o tipo de perfil</label>
+                        </div>
+
+                        {{ register_form.register_submit(class="sign-btn") }}
+
+                        <p class="text">
+                            Ao me inscrever, concordo com os
+                            <a href="#">Termos de Serviço</a> e a
+                            <a href="#">Política de Privacidade</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+
+            <div class="carousel">
+                <div class="images-wrapper">
+                    <img src="static/img/index-img-1.png" class="image img-1 show" alt="" />
+                    <img src="static/img/index-img-5.png" class="image img-2" alt="" />
+                    <img src="static/img/index-img-6.png" class="image img-3" alt="" />
+                </div>
+
+                <div class="text-slider">
+                    <div class="text-wrap">
+                        <div class="text-group">
+                            <h2>Gerenciamento Inteligente de Equipes</h2>
+                            <h2>Acompanhamento de Performance</h2>
+                            <h2>Controle dos Resultados</h2>
+                        </div>
+                    </div>
+
+                    <div class="bullets">
+                        <span class="active" data-value="1"></span>
+                        <span data-value="2"></span>
+                        <span data-value="3"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Javascript file -->
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>

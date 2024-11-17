@@ -1,0 +1,139 @@
+/* Fonte e espaçamento básico */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 20px;
+    color: #444;
+}
+
+/* Títulos */
+h1 {
+    color: #222;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Estilizando o formulário */
+form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 40px auto;
+}
+
+/* Labels dos campos */
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+/* Estilizando os inputs */
+input[type="text"],
+input[type="email"],
+input[type="date"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Estilizando o botão */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
+}
+
+button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 6px 10px rgba(0, 123, 255, 0.4);
+}
+
+button:active {
+    background-color: #004494;
+    box-shadow: none;
+}
+
+/* Mensagens de feedback */
+.flashes {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.success {
+    color: #28a745;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.danger {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Estilos para o estado de erro */
+.error-message {
+    color: red;
+    margin-top: 5px;
+    font-size: 0.875rem;
+}
+
+/* Botão de envio com estado de carregamento */
+button.loading {
+    background-color: #0056b3;
+    cursor: not-allowed;
+    position: relative;
+}
+
+button.loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-left-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

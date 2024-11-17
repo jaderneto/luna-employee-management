@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>JNto HCM</title>
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static', filename='img/jnto_logo.png') }}" rel="icon">
+  <link href="{{ url_for('static', filename='img/jnto_logo_with_name.png') }}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/bootstrap-icons.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/main_style.css') }}" rel="stylesheet">
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="" class="logo d-flex align-items-center">
+        <img src="{{ url_for('static', filename='img/jnto_logo.png') }}" alt="Logo">
+        <span class="d-none d-lg-block">JNto HCM</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+      </form>
+    </div><!-- End Search Bar -->
+  </header>
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ url_for('main.index') }}">
+          <i class="bi bi-grid"></i>
+          <span>Home</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-target="#funcionarios-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-person"></i>
+          <span>Funcionários</span>
+          <i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="funcionarios-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{ url_for('employees.search_employee_page') }}">
+              <i class="bi bi-search"></i><span>Buscar</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('employees.create_employee_page') }}" class="active">
+              <i class="bi bi-plus-circle" ></i><span>Criar Novo</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Components Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="pages-contact.html">
+          <i class="bi bi-envelope"></i>
+          <span>Contact</span>
+        </a>
+      </li><!-- End Contact Page Nav -->
+    </ul>
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Criar Nova Equipe</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Home</a></li>
+          <li class="breadcrumb-item active">Equipes</li>
+          <li class="breadcrumb-item active">Nova Equipe</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-8">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Preencha os dados da Nova Equipe</h5>
+
+              <!-- Formulário de criação de funcionário -->
+              <form action="{{ url_for('teams.create_team_page') }}" method="POST">
+                <div class="row mb-3">
+                  <label for="name" class="col-sm-2 col-form-label">Nome da Equipe</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name" name="name" required>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-sm-12 text-center">
+                    <button type="submit" class="btn btn-success rounded-pill custom-btn-text">Criar Equipe</button>
+                  </div>
+                </div>
+              </form>
+              <!-- End Formulário -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Display flash messages -->
+      {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+          <ul class="flashes">
+            {% for category, message in messages %}
+              <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+
+    </section>
+  </main><!-- End #main -->
+
+  <!-- Bootstrap JS -->
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+  <!-- Template Main JS File -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/form.js') }}"></script>
+</body>
+</html>
